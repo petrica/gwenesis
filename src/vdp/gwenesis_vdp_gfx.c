@@ -741,6 +741,12 @@ void draw_sprites_over_planes(int line)
 
         int sy = ((cache[0] & 0x3) << 8) | cache[1];
         int sx = ((table[6] & 0x3) << 8) | table[7];
+
+        // Normalize sprite position relative to screen
+        // Fix for snow bros.
+        if (sy >= 512) sy -= 512;
+        if (sx >= 512) sx -= 512;
+
         uint16_t name = (table[4] << 8) | table[5];
 
 
@@ -848,6 +854,12 @@ void draw_sprites(int line)
 
     int sy = ((cache[0] & 0x3) << 8) | cache[1];
     int sx = ((table[6] & 0x3) << 8) | table[7];
+
+    // Normalize sprite position relative to screen
+    // Fix for snow bros.
+    if (sy >= 512) sy -= 512;
+    if (sx >= 512) sx -= 512;
+
     uint16_t name = (table[4] << 8) | table[5];
 
     int sh = BITS(cache[2], 0, 2) + 1;
